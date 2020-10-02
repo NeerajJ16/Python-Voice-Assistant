@@ -3,6 +3,8 @@ import datetime
 import speech_recognition as sr
 import wikipedia
 import webbrowser
+import pyjokes
+import pyautogui
 
 engine = pyttsx3.init()
 
@@ -11,19 +13,45 @@ def speak(text):
   print('[Jarvis] : ' +text)
   engine.say(text)
   engine.runAndWait()
+  
+def time():
+    Time = datetime.datetime.now().strftime("%I:%M:%S")
+    speak("the current time is")
+    speak(Time)
+    
+def screenshot():
+    img = pyautogui.screenshot()
+    img.save("C:\\Users\\arbaz\\Desktop\\Open-cv\\jarvis\\ss.png")
+    
+def jokes():
+    speak(pyjokes.get_joke())
+
+  
+def date():
+    year = int(datetime.datetime.now().year)
+    month = int(datetime.datetime.now().month)
+    date = int(datetime.datetime.now().day)
+    speak("the current date is")
+    speak(date)
+    speak(month)
+    speak(year)
+
 
 def wish_me():
-  hour = int(datetime.datetime.now().hour)
-  greeting = ''
+  speak("Welcome back sir!")
+    time()
+    date()
+    hour = datetime.datetime.now().hour
+    if hour >= 6 and hour<12:
+        speak("Good morning sir!")
+    elif hour >=12 and hour<18:
+        speak("Good afternoon sir")
+    elif hour >= 18 and hour<24:
+        speak("Good Evening sir")
+    else:
+        speak("Good night sir")
 
-  if hour>=0 and hour<12:
-    greeting = 'Good morning!'
-  elif hour>=12 and hour<18:
-    greeting = 'Good afternoon!'
-  else:
-    greeting = 'Good evening!'
-
-  speak(greeting + ' I am Jarvis, How can I help you today?')
+    speak("Jarvis at your service. Please tell me how can i help you?")
 
 def takeCommand():
   #It takes microphone input from the user and returns string output
@@ -85,7 +113,14 @@ while True:
 
   elif 'bye' or 'thank you' in command:
     speak('Goodbye, Have a nice day!')
-
+    
+  elif 'joke' in query:
+		jokes()
+     
+  elif 'screenshot' in query:
+		 screenshot()
+		 speak("Done!")
+      
   else:
     speak('I didn\'t quiet catch you sir. Can you please try that again?')
     
