@@ -83,6 +83,10 @@ while True:
   elif 'open stack overflow' in command:
     speak('Opening StackOverflow')
     webbrowser.open("https://stackoverflow.com")
+    
+  elif 'open spotify' in command:
+    speak("Opening Spotify")
+    webbrowser.open("https://spotify.com")
 
   elif 'what' in command and 'time' in command:
     strTime = datetime.datetime.now().strftime("%H:%M:%S")    
