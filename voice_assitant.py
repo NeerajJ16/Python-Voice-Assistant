@@ -61,17 +61,32 @@ while True:
     results = wikipedia.summary(command, sentences=1)
     speak('According to wikipedia, ' +results)
 
-  elif 'open youtube' in command:
-    speak('Opening Youtube')
-    webbrowser.open("https://youtube.com")
+  elif 'open youtube' in query:
+    query=query.replace("open youtube","")
+    webbrowser.register('chrome',None,webbrowser.BackgroundBrowser("C://Program Files (x86)//Google//Chrome//Application//chrome.exe"))
+    webbrowser.get('chrome').open(f'https://youtube.com')
+    
+    
+  elif 'on google' in query:
+    query=query.replace(" on google","")
+    webbrowser.register('chrome',None,webbrowser.BackgroundBrowser("C://Program Files (x86)//Google//Chrome//Application//chrome.exe"))
+    query=query.replace(" ","+")
+    print(query)
+    webbrowser.get('chrome').open(f'https://google.com/search?q={query}')
 
-  elif 'open google' in command:
-    speak('Opening Google')
-    webbrowser.open("https://google.com")
+  elif 'open google' in query:
+    query=query.replace("open google","")
+    webbrowser.register('chrome',None,webbrowser.BackgroundBrowser("C://Program Files (x86)//Google//Chrome//Application//chrome.exe"))
+    query=query.replace(" ","+")
+    webbrowser.get('chrome').open(f'https://google.com')
 
   elif 'open stack overflow' in command:
     speak('Opening StackOverflow')
     webbrowser.open("https://stackoverflow.com")
+    
+  elif 'open spotify' in command:
+    speak("Opening Spotify")
+    webbrowser.open("https://spotify.com")
 
   elif 'what' in command and 'time' in command:
     strTime = datetime.datetime.now().strftime("%H:%M:%S")    
